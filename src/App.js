@@ -25,30 +25,37 @@ function App() {
     setSearchValue(event.target.value);
   };
 
-  const onClickSendInvites = () =>{
+  const onClickSendInvites = () => {
     setSuccess(!success);
-  }
+  };
 
-  const onClickInvite = (id)=>{
-    if(invites.includes(id)){
-      setInvites(prev=>prev.filter(_id=>_id!==id));
+  const onClickInvite = (id) => {
+    if (invites.includes(id)) {
+      setInvites((prev) => prev.filter((_id) => _id !== id));
+    } else {
+      setInvites((prev) => [...prev, id]);
     }
-    else{
-      setInvites(prev=>[...prev,id]);
-    }
-  }
+  };
 
   return (
     <div className="App">
-      {success ? <Success count = {invites.length} setInvites = {setInvites} onClickSendInvites = {onClickSendInvites}/> : <Users
-        invites={invites}
-        onClickInvite= {onClickInvite}
-        onSearchValue={onSearchValue}
-        items={users}
-        searchValuse={searchValuse}
-        isLoading={isLoading}
-        onClickSendInvites={onClickSendInvites}
-      />}
+      {success ? (
+        <Success
+          count={invites.length}
+          setInvites={setInvites}
+          onClickSendInvites={onClickSendInvites}
+        />
+      ) : (
+        <Users
+          invites={invites}
+          onClickInvite={onClickInvite}
+          onSearchValue={onSearchValue}
+          items={users}
+          searchValuse={searchValuse}
+          isLoading={isLoading}
+          onClickSendInvites={onClickSendInvites}
+        />
+      )}
     </div>
   );
 }
